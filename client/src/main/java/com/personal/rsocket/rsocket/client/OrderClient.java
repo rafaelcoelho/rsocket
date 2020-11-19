@@ -34,9 +34,18 @@ public class OrderClient
     public void stream()
     {
         disposable = this.requesterBuilder
-                .route("orders-stream")
-                .data(new Order(1, 10, "Mobile Phone", "Samsung Galaxy Note prince starting from 10"))
+                .route("orders")
                 .retrieveFlux(Order.class)
+                .subscribe(it -> log.info("Response: {} \n(Type 's' to stop.", it));
+    }
+
+    @ShellMethod("Send one request and receive a one order")
+    public void getOrder(String orderId)
+    {
+        disposable = this.requesterBuilder
+                .route("order")
+                .data(orderId)
+                .retrieveMono(Order.class)
                 .subscribe(it -> log.info("Response: {} \n(Type 's' to stop.", it));
     }
 

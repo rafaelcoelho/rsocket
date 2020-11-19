@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class Order
 {
-    private Integer id;
+    private String id;
     private Integer price;
     private String name;
     private String description;

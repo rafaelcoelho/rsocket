@@ -1,28 +1,42 @@
 package com.personal.rsocket.rsocket.server;
 
 import java.time.Duration;
-import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 
 import com.personal.rsocket.rsocket.data.Order;
+import com.personal.rsocket.rsocket.data.OrderReactiveRepository;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @Controller
 public class OrderController
 {
-    @MessageMapping("orders-stream")
-    public Flux<Order> orders(final Order request)
-    {
-        log.info("Received stream request: {}", request);
+    @Autowired
+    private OrderReactiveRepository orderRepository;
 
-        return Flux
-                .interval(Duration.ofSeconds(1))
-                .map(it -> new Order("null", request.getPrice() + it.intValue(), request.getName(), request.getDescription() + " Price is changing !!!"))
+    @MessageMapping("orders")
+    public Flux<Order> orders()
+    {
+        log.info("Received request to read all orders");
+
+        return this.orderRepository
+                .findAll()
+                .log();
+    }
+
+    @MessageMapping("order")
+    public Mono<Order> order(final String orderId)
+    {
+        log.info("Received orderId to read an orders by id: {}", orderId);
+
+        return this.orderRepository
+                .findById(orderId)
                 .log();
     }
 }
