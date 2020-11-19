@@ -22,7 +22,7 @@ public class OrderController
 
         return Flux
                 .interval(Duration.ofSeconds(1))
-                .map(it -> new Order(10, request.getPrice() + it.intValue(), request.getName(), request.getDescription() + " Price is changing !!!"))
+                .map(it -> new Order("null", request.getPrice() + it.intValue(), request.getName(), request.getDescription() + " Price is changing !!!"))
                 .log();
     }
 }
