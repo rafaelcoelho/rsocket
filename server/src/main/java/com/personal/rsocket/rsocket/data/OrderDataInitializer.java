@@ -20,7 +20,7 @@ public class OrderDataInitializer
     {
         final Flux<Order> orders = Flux
                 .just("Apple", "Samsung", "LG", "Motorola", "ZTE", "ASUS")
-                .map(brand -> new Order(null, 10, brand, "Some Description"))
+                .map(brand -> new Order(null, 10, brand, brand + " A small and powerful mobile phone"))
                 .flatMap(this.orderRepository::save);
 
         this.orderRepository
