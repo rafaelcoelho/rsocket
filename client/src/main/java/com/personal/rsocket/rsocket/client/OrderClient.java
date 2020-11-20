@@ -26,8 +26,7 @@ public class OrderClient
         requesterBuilder = builder
                 .setupRoute("shell-client")
                 .setupData(UUID.randomUUID().toString())
-                .connectTcp("localhost", 7000)
-                .block();
+                .tcp("localhost", 7000);
     }
 
     @ShellMethod("Send one request and receive a stream of orders")
