@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: OFF
+    lazy-initialization: true
+  rsocket:
+    server:
+      port: 7000
+  devtools:
+    remote:
+      secret: 123

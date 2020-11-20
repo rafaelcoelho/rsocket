@@ -1,0 +1,7 @@
+spring:
+  main:
+    banner-mode: OFF
+    lazy-initialization: true
+  devtools:
+    remote:
+      secret: 123
