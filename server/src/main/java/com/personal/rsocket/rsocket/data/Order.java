@@ -19,4 +19,5 @@ public class Order
     private Integer price;
     private String name;
     private String description;
+    private String time;
 }

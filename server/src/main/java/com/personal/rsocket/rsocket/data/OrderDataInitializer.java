@@ -1,5 +1,7 @@
 package com.personal.rsocket.rsocket.data;
 
+import java.time.Instant;
+
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ public class OrderDataInitializer
     {
         final Flux<Order> orders = Flux
                 .just("Apple", "Samsung", "LG", "Motorola", "ZTE", "ASUS")
-                .map(brand -> new Order(null, 10, brand, brand + " A small and powerful mobile phone"))
+                .map(brand -> new Order(null, 10, brand, brand + " A small and powerful mobile phone", Instant.now().toString()))
                 .flatMap(this.orderRepository::save);
 
         this.orderRepository

@@ -3,6 +3,7 @@ package com.personal.rsocket.rsocket.client;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -16,7 +17,6 @@ import reactor.core.Disposable;
 @ShellComponent
 public class OrderClient
 {
-
     private final RSocketRequester requesterBuilder;
     private Disposable disposable;
 
@@ -27,6 +27,12 @@ public class OrderClient
                 .setupRoute("shell-client")
                 .setupData(UUID.randomUUID().toString())
                 .tcp("localhost", 7000);
+    }
+
+    @Bean
+    public RSocketRequester requester()
+    {
+        return this.requesterBuilder;
     }
 
     @ShellMethod("Send one request and receive a stream of orders")
