@@ -24,14 +24,10 @@ public class OrderProtoBuf {
 
     @Autowired
     public OrderProtoBuf(RSocketRequester.Builder builder) {
-        ProtobufDecoder protobufDecoder = new ProtobufDecoder();
-
         requesterBuilder = builder
-                .rsocketStrategies(it -> {
-                    it.encoder(new ProtobufEncoder())
-                            .decoder(protobufDecoder)
-                            .build();
-                })
+                .rsocketStrategies(it -> it.encoder(new ProtobufEncoder())
+                        .decoder(new ProtobufDecoder())
+                        .build())
                 .setupRoute("protobuf-client")
                 .setupData(UUID.randomUUID().toString())
                 .tcp("localhost", 7000);
