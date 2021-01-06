@@ -1,17 +1,15 @@
 package com.personal.rsocket.rsocket.client;
 
-import java.util.UUID;
-
+import com.personal.rsocket.rsocket.data.Order;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
-
-import com.personal.rsocket.rsocket.data.Order;
-
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.Disposable;
+
+import java.util.UUID;
 
 @Slf4j
 @ShellComponent
