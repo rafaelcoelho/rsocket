@@ -41,5 +41,18 @@ generate docker images, in order to use that prompt from terminal:
 $ ./mvnw spring-boot:build-image -DskipTests=true
 $ docker run -p 8080:8080 {image}
 ```
+
+## Proto Buffer Support
+Further details from [Protobuff](https://github.com/protocolbuffers/protobuf/tree/master)
+
+The PB compiler can be download from [Maven Central](https://search.maven.org/classic/#search%7Cga%7C1%7Cg%3A"com.google.protobuf"%20AND%20a%3A"protoc") and have to copied to `${BASE_DIR_REPO}/server/src/main`
+
+### First compile the proto file
+From terminal execute
+
+```bash
+$ protc --java_out=java resources/Order.proto
+```
+
 ## Goal
 Measure the latency between services communications as well as security and resource consumption when using channel/stream interaction models.
