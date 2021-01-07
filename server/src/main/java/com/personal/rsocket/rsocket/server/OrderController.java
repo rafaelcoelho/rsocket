@@ -48,6 +48,22 @@ public class OrderController
                 .log();
     }
 
+    @MessageMapping ("monitor-protobuf")
+    public Flux<Order> monitorProtoBuff(final String orderId)
+    {
+        log.info("Received orderId ({}) to monitor using Protobuf", orderId);
+
+        return Flux
+                .fromStream(Stream.generate(() -> orderId))
+                .flatMap(id -> this.orderRepository.findById(id).flux())
+                .map(order -> {
+                    order.setTime(Instant.now().toString());
+                    return order;
+                })
+                .delayElements(Duration.ofSeconds(1))
+                .log();
+    }
+
     @MessageMapping ("order")
     public Mono<Order> order(final String orderId)
     {
