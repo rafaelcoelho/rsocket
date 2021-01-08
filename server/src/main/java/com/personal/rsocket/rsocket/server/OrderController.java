@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.stream.Stream;
 
+import com.personal.rsocket.rsocket.data.proto.OrderProto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
@@ -17,14 +18,12 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Controller
-public class OrderController
-{
+public class OrderController {
     @Autowired
     private OrderReactiveRepository orderRepository;
 
-    @MessageMapping ("orders")
-    public Flux<Order> orders()
-    {
+    @MessageMapping("orders")
+    public Flux<Order> orders() {
         log.info("Received request to read all orders");
 
         return this.orderRepository
@@ -32,9 +31,8 @@ public class OrderController
                 .log();
     }
 
-    @MessageMapping ("monitor")
-    public Flux<Order> monitor(final String orderId)
-    {
+    @MessageMapping("monitor")
+    public Flux<Order> monitor(final String orderId) {
         log.info("Received orderId ({}) to monitor", orderId);
 
         return Flux
@@ -48,9 +46,8 @@ public class OrderController
                 .log();
     }
 
-    @MessageMapping ("monitor-protobuf")
-    public Flux<Order> monitorProtoBuff(final String orderId)
-    {
+    @MessageMapping("monitor-protobuf")
+    public Flux<OrderProto.Order> monitorProtoBuff(final String orderId) {
         log.info("Received orderId ({}) to monitor using Protobuf", orderId);
 
         return Flux
@@ -60,13 +57,19 @@ public class OrderController
                     order.setTime(Instant.now().toString());
                     return order;
                 })
+                .map(order -> OrderProto.Order.newBuilder()
+                        .setDescription(order.getDescription())
+                        .setId(order.getId())
+                        .setName(order.getName())
+                        .setPrice(order.getPrice())
+                        .setTime(order.getTime())
+                        .build())
                 .delayElements(Duration.ofSeconds(1))
                 .log();
     }
 
-    @MessageMapping ("order")
-    public Mono<Order> order(final String orderId)
-    {
+    @MessageMapping("order")
+    public Mono<Order> order(final String orderId) {
         log.info("Received orderId to read an orders by id: {}", orderId);
 
         return this.orderRepository
