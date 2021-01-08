@@ -1,6 +1,7 @@
 package com.personal.rsocket.rsocket.client;
 
 import com.personal.rsocket.rsocket.data.Order;
+import com.personal.rsocket.rsocket.data.proto.OrderProto;
 import lombok.AllArgsConstructor;
 import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,13 @@ public class OrderProtoBuf {
         return this.requesterBuilder
                 .route("monitor-protobuf")
                 .data(id)
-                .retrieveFlux(Order.class);
+                .retrieveFlux(OrderProto.Order.class)
+                .map(it -> Order.builder()
+                        .id(it.getId())
+                        .price(it.getPrice())
+                        .name(it.getName())
+                        .description(it.getDescription())
+                        .time(it.getTime())
+                        .build());
     }
 }
