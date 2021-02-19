@@ -56,3 +56,6 @@ $ protc --java_out=java resources/Order.proto
 
 ## Goal
 Measure the latency between services communications as well as security and resource consumption when using channel/stream interaction models.
+
+## CI
+Based on GitHub Actions
