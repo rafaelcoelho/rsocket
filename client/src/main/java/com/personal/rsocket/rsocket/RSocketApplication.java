@@ -8,6 +8,6 @@ public class RSocketApplication
 {
     public static void main(String[] args)
     {
-        SpringApplication.run(RSocketApplication.class, args)
+        SpringApplication.run(RSocketApplication.class, args);
     }
 }
