@@ -58,4 +58,4 @@ $ protc --java_out=java resources/Order.proto
 Measure the latency between services communications as well as security and resource consumption when using channel/stream interaction models.
 
 ## CI
-Based on GitHub Actions towards client and server
+Based on GitHub Actions towards client and server that will be enforced by CI when open a PR to master branch.
