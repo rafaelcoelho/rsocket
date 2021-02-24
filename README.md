@@ -62,3 +62,6 @@ Based on GitHub Actions towards client and server that will be enforced by CI wh
 
 ## Collaboration
 Please fell free to open a PR that will be very welcome.
+
+## License
+MIT
