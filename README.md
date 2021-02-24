@@ -59,3 +59,7 @@ Measure the latency between services communications as well as security and reso
 
 ## CI
 Based on GitHub Actions towards client and server that will be enforced by CI when open a PR to master branch.
+
+
+## Collaboration
+Please fell free to open a PR that will be very welcome.
