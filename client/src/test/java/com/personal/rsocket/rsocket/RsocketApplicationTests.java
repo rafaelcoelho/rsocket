@@ -11,7 +11,7 @@ import static java.util.List.of;
 
 class RsocketApplicationTests {
 
-    private static final int TIMES = 100000;
+    private static final int TIMES = 1000;
     private static final List<Car> CARS = new ArrayList<>(Byte.MAX_VALUE * TIMES);
 
     @Test
@@ -31,7 +31,7 @@ class RsocketApplicationTests {
                         (a, b) -> a.cars(b.build().getCars()))
                 .build();
 
-        System.out.println("carsCollected = " + (carsCollected.getCars().size() == CARS.size()));
+        System.out.println("CarsCollected are equals? " + (carsCollected.getCars().size() == CARS.size()));
 
         Assertions.assertThat(carsCollected.getCars())
                 .hasSameSizeAs(CARS);
