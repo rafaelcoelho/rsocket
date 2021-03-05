@@ -18,7 +18,7 @@ class RsocketApplicationTests {
     void reduce() {
 
         for (int i = 0; i < Byte.MAX_VALUE * TIMES; i++) {
-            Car car = new Car("black" + i, "bmw_" + 1, of("sound", "alarm", "gps"));
+            Car car = new Car("blue" + i, "bmw_" + 1, of("sound", "alarm", "gps"));
             CARS.add(car);
         }
 
